@@ -4,7 +4,7 @@ app.use(express.json());
 
 let customers = [];
 
-// Add Customer
+// v1  Add Customer
 app.post('/add', (req, res) => {
     const { name, age } = req.body;
 
@@ -16,9 +16,16 @@ app.post('/add', (req, res) => {
     res.send("Customer added"); // Only message, not the array
 });
 
-// View Customers
+// v2 View Customers
 app.get('/view', (req, res) => {
     res.json(customers); // Full array of customers
+});
+
+// v3 - Update Customer
+app.put('/update/:id', (req, res) => {
+    const id = req.params.id;
+    customers[id] = req.body;
+    res.send("Customer updated");
 });
 
 app.listen(3000, () => console.log("Running on port 3000"));
